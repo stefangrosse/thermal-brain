@@ -10,13 +10,13 @@ This document defines the engineering principles, architecture and development w
 
 # Project Mission
 
-Thermal Brain is a framework-independent Building Intelligence Engine.
+Thermal Brain is a framework-independent **Building Intelligence Engine**.
 
 The goal is **not** to automate heating systems.
 
 The goal is to understand buildings.
 
-Thermal Brain continuously learns the thermal behaviour of a building and uses this knowledge to:
+Thermal Brain continuously learns the thermal behaviour of a building and uses this knowledge to
 
 - analyse
 - predict
@@ -32,9 +32,9 @@ The Core must remain independent from every automation platform.
 
 # Vision
 
-Thermal Brain should become the reference Open Source library for thermal building intelligence.
+Thermal Brain aims to become the leading Open Source library for thermal building intelligence.
 
-The project should support multiple integrations including:
+The project should support multiple integrations including
 
 - Home Assistant
 - openHAB
@@ -46,9 +46,7 @@ The project should support multiple integrations including:
 
 ---
 
-# Architecture
-
-Monorepo
+# Repository Structure
 
 ```
 thermal-brain/
@@ -68,13 +66,15 @@ examples/
 benchmarks/
 ```
 
-Business logic belongs exclusively inside:
+All business logic belongs to
 
 ```
 packages/thermal_brain_core/
 ```
 
-Integrations must never contain business logic.
+Integrations are adapters only.
+
+They must never contain business logic.
 
 ---
 
@@ -85,23 +85,152 @@ Integrations must never contain business logic.
 - SOLID
 - Clean Architecture
 - Test Driven Development
-- Explainable Algorithms
 - Physics before AI
+- Explainable Algorithms
 - Local First
 - Vendor Independent
 - Open Source First
 
 ---
 
+# Technology Stack
+
+- Python 3.12+
+- Pydantic v2
+- Pytest
+- Ruff
+- MyPy
+- uv
+- GitHub Actions
+
+---
+
+# Domain Rules
+
+Physical quantities shall not be represented by primitive types.
+
+Always use Value Objects.
+
+Examples
+
+- Temperature
+- Energy
+- Power
+- Percentage
+- Duration
+- Identifier
+
+The Core domain must remain completely independent of Home Assistant.
+
+---
+
 # Development Workflow
 
-Before implementing any feature:
+Always follow GitHub Flow.
 
-1. Read the relevant ADRs.
-2. Read `docs/ROADMAP.md`.
-3. Reuse existing abstractions.
-4. Avoid breaking changes.
-5. Prefer extending over rewriting.
+Never work directly on `main`.
+
+Every GitHub Issue is implemented inside its own feature branch.
+
+Workflow
+
+Issue
+
+↓
+
+Feature Branch
+
+↓
+
+Implementation
+
+↓
+
+Tests
+
+↓
+
+Pull Request
+
+↓
+
+Review
+
+↓
+
+Squash Merge
+
+↓
+
+Delete Branch
+
+---
+
+# Branch Naming
+
+Features
+
+```
+feature/<issue-number>-<short-description>
+```
+
+Example
+
+```
+feature/12-observation-engine
+```
+
+Bug Fixes
+
+```
+fix/<issue-number>-<short-description>
+```
+
+Refactoring
+
+```
+refactor/<short-description>
+```
+
+---
+
+# Commits
+
+Use Conventional Commits.
+
+Examples
+
+```
+feat(observation): implement observation engine
+
+feat(statistics): add heating degree day calculation
+
+fix(core): validate percentage range
+
+docs(domain): update observation model
+
+refactor(domain): simplify observation API
+```
+
+---
+
+# Pull Requests
+
+Every GitHub Issue results in exactly one Pull Request.
+
+Before opening a Pull Request verify
+
+- Ruff passes
+- MyPy passes
+- Pytest passes
+- Documentation updated
+- ADR added if architecture changed
+
+Merge Strategy
+
+**Squash and Merge**
+
+Delete the feature branch after merging.
 
 ---
 
@@ -111,65 +240,29 @@ Always
 
 - write production-ready code
 - use explicit typing
-- write unit tests
+- write tests
 - document public APIs
 - keep functions small
 - keep classes focused
 - prefer composition over inheritance
-- follow existing architecture
+- reuse existing abstractions
 
 Never
 
-- generate placeholder implementations
+- generate placeholder code
+- generate pseudo code
 - add TODOs
 - duplicate logic
-- introduce unnecessary dependencies
-- redesign existing architecture unless explicitly requested
+- redesign existing architecture without an ADR
+- commit directly to main
 
 ---
 
-# Technology Stack
-
-Python 3.12+
-
-Pydantic v2
-
-Pytest
-
-Ruff
-
-MyPy
-
-uv
-
-GitHub Actions
-
----
-
-# Domain Rules
-
-Primitive values representing physical quantities should not be passed through the domain model.
-
-Use Value Objects.
-
-Examples:
-
-- Temperature
-- Energy
-- Power
-- Percentage
-- Duration
-- Identifier
-
-The domain model must remain platform independent.
-
----
-
-# Architecture Decision Records
+# ADR Rules
 
 Architecture changes require an ADR.
 
-Current ADRs:
+Current ADRs
 
 - ADR-0001 Building First
 - ADR-0002 Framework Independent Core
@@ -182,68 +275,11 @@ Current ADRs:
 
 # Testing
 
-Every new feature requires tests.
+Every feature requires tests.
 
 Every bug requires a regression test.
 
 Domain logic must be testable without Home Assistant.
-
----
-
-# Commit Rules
-
-Use Conventional Commits.
-
-Examples:
-
-feat(domain):
-feat(statistics):
-fix(core):
-refactor(domain):
-docs(roadmap):
-test(core):
-ci:
-build:
-
-Every commit must:
-
-- compile
-- pass tests
-- pass Ruff
-- pass MyPy
-
----
-
-# Milestone Workflow
-
-Development follows the project roadmap.
-
-Each milestone must result in:
-
-- mergeable code
-- tests
-- documentation
-- commit message
-- ADR if architecture changes
-
----
-
-# Review
-
-After implementation perform a self review.
-
-Verify:
-
-- Architecture
-- API consistency
-- Ruff
-- MyPy
-- Pytest
-- Documentation
-
-Review findings should be reported separately.
-
-Do not modify the implementation during review.
 
 ---
 
@@ -257,7 +293,49 @@ Commit messages are written in English.
 
 ADRs are written in English.
 
-Discussion with the project owner may be in German.
+Discussions with the project owner may be in German.
+
+---
+
+# Development Process for AI Agents
+
+Before implementing a GitHub Issue
+
+1. Read AGENTS.md
+2. Read docs/ROADMAP.md
+3. Read all relevant ADRs
+4. Create a feature branch
+5. Implement the issue
+6. Write tests
+7. Update documentation
+8. Run Ruff
+9. Run MyPy
+10. Run Pytest
+11. Commit using Conventional Commits
+12. Open a Pull Request
+
+Never merge the Pull Request.
+
+Never redesign the architecture unless explicitly requested.
+
+---
+
+# Review
+
+After implementation perform a self review.
+
+Verify
+
+- Architecture
+- API consistency
+- Ruff
+- MyPy
+- Pytest
+- Documentation
+
+Report improvements separately.
+
+Do not modify the implementation during the review.
 
 ---
 
