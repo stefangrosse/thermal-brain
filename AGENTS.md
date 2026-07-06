@@ -172,7 +172,7 @@ fix/<issue-number>-<short-description>
 Refactoring
 
 ```
-refactor/<short-description>
+refactor/<issue-number>-<short-description>
 ```
 
 ---
@@ -251,14 +251,11 @@ Never
 
 Architecture changes require an ADR.
 
-Current ADRs
+Current ADRs are stored in
 
-- ADR-0001 Building First
-- ADR-0002 Framework Independent Core
-- ADR-0003 Test Driven Development
-- ADR-0004 Pydantic Domain Models
-- ADR-0005 Strongly Typed Value Objects
-- ADR-0006 Domain uses Value Objects
+```
+docs/adr/
+```
 
 ---
 
@@ -288,22 +285,8 @@ Discussions with the project owner may be in German.
 
 # Development Process for AI Agents
 
-Before implementing a GitHub Issue
-
-1. Read AGENTS.md
-2. Read docs/ROADMAP.md
-3. Read all relevant ADRs
-4. Create a feature branch
-5. Implement the issue
-6. Write tests
-7. Update documentation
-8. Run Ruff
-9. Run MyPy
-10. Run Pytest
-11. Commit using Conventional Commits
-12. Open a Pull Request
-
-Never merge the Pull Request.
+AI agents must follow the mandatory workflow defined in
+[Development Workflow](#development-workflow).
 
 Never redesign the architecture unless explicitly requested.
 
