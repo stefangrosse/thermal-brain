@@ -1,6 +1,5 @@
-from .building import Building
-from .zone import Zone
-from .weather import WeatherSnapshot
+from .entities import Building, Zone
+from .weather import WeatherObservation, WeatherForecast
 from .thermal_state import ThermalState
-from .recommendation import Recommendation
 from .observation import Observation
+from .recommendation import Recommendation

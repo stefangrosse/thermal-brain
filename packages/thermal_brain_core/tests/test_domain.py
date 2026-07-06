@@ -1,6 +1,6 @@
-from thermal_brain_core.domain import Building, Zone
+from thermal_brain_core.domain import Building
 
 def test_building():
-    b=Building(name="House",zones=[Zone(id="eg",name="Ground Floor")])
-    assert b.name=="House"
-    assert len(b.zones)==1
+    b=Building(id="house",name="My House",construction_year=1954)
+    assert b.id=="house"
+    assert b.construction_year==1954

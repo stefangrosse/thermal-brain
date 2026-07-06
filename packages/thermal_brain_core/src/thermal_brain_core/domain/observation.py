@@ -1,9 +1,13 @@
 from datetime import datetime
-from pydantic import BaseModel
+from typing import Any
+from pydantic import BaseModel, Field
 
 class Observation(BaseModel):
-    timestamp:datetime
-    source:str
-    metric:str
-    value:float
-    unit:str
+    id: str
+    timestamp: datetime
+    source: str
+    quantity: str
+    value: float
+    unit: str
+    quality: str = "measured"
+    metadata: dict[str, Any] = Field(default_factory=dict)

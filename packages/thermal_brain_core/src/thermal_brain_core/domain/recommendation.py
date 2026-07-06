@@ -1,6 +1,6 @@
-from pydantic import BaseModel
+from typing import Protocol
 
-class Recommendation(BaseModel):
-    title:str
-    description:str
-    confidence:float
+class Recommendation(Protocol):
+    title: str
+    description: str
+    confidence: float
