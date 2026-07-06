@@ -1,0 +1,8 @@
+[project]
+name="thermal-brain"
+version="0.1.0"
+description="Building Intelligence Engine for Home Assistant"
+requires-python=">=3.12"
+
+[tool.ruff]
+line-length=100
