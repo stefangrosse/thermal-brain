@@ -5,6 +5,7 @@ from .thermal_state import ThermalState
 from .observation import Observation
 from .quantities import ObservationQuantity, ObservationValue
 from .recommendation import Recommendation
+from .statistics import DescriptiveStatistics, descriptive_statistics
 from .sensors import Sensor, SensorRegistry
 from .time_series import ObservationTimeSeries
 
@@ -17,6 +18,7 @@ __all__ = [
     "ObservationQuantity",
     "ObservationTimeSeries",
     "ObservationValue",
+    "DescriptiveStatistics",
     "Recommendation",
     "Sensor",
     "SensorRegistry",
@@ -24,4 +26,5 @@ __all__ = [
     "WeatherForecast",
     "WeatherObservation",
     "Zone",
+    "descriptive_statistics",
 ]

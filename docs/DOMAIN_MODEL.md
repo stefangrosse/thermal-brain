@@ -66,6 +66,12 @@ Observation time series are ordered immutable collections of observations.
 They support filtering by time range and sensor without depending on a storage
 backend.
 
+## Statistics
+
+Descriptive statistics summarize numeric observation series using count,
+minimum, maximum, mean, median, variance, and standard deviation.
+The first statistics API is exposed on `ObservationTimeSeries`.
+
 ## Thermal Charge (experimental)
 
 A normalized representation of the amount of usable thermal energy currently stored in the building.
