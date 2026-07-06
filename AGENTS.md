@@ -126,43 +126,26 @@ The Core domain must remain completely independent of Home Assistant.
 
 # Development Workflow
 
-Always follow GitHub Flow.
+Every repository change must originate from exactly one GitHub Issue.
 
-Never work directly on `main`.
+Development must always start from the latest `main` branch.
 
-Every GitHub Issue is implemented inside its own feature branch.
+AI agents must never implement changes while on `main`.
+
+Every GitHub Issue must be implemented inside its own feature branch.
 
 Workflow
 
-Issue
-
-↓
-
-Feature Branch
-
-↓
-
-Implementation
-
-↓
-
-Tests
-
-↓
-
-Pull Request
-
-↓
-
-Review
-
-↓
-
-Squash Merge
-
-↓
-
-Delete Branch
+1. Switch to `main`.
+2. Pull the latest changes.
+3. Create a dedicated feature branch for the issue.
+4. Verify the current branch is not `main`.
+5. Implement the assigned GitHub Issue.
+6. Run Ruff, MyPy and Pytest.
+7. Commit using Conventional Commits.
+8. Push the feature branch.
+9. Open a Pull Request.
+10. Do not merge the Pull Request.
 
 ---
 
@@ -216,7 +199,13 @@ refactor(domain): simplify observation API
 
 # Pull Requests
 
-Every GitHub Issue results in exactly one Pull Request.
+Every Pull Request must address exactly one GitHub Issue.
+
+Every feature branch must be pushed and submitted as a Pull Request.
+
+AI agents must never merge Pull Requests automatically.
+
+All CI checks must pass before a Pull Request can be merged.
 
 Before opening a Pull Request verify
 
