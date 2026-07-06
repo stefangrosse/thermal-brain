@@ -1,0 +1,29 @@
+name: Feature request
+description: Suggest a new capability or improvement.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What should Thermal Brain support or improve?
+      placeholder: Describe the user need or missing capability.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed approach
+      description: Outline the preferred direction if you have one.
+      placeholder: Keep it short and practical.
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add links, examples, or constraints if relevant.
+    validations:
+      required: false
