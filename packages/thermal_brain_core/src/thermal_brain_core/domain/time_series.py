@@ -4,6 +4,7 @@ from typing import Iterable, Iterator
 from thermal_brain_core.value_objects import Identifier
 
 from .observation import Observation
+from .statistics import DescriptiveStatistics, descriptive_statistics
 
 
 class ObservationTimeSeries:
@@ -44,6 +45,9 @@ class ObservationTimeSeries:
             for observation in self._observations
             if observation.sensor_id == sensor_id
         )
+
+    def descriptive_statistics(self) -> DescriptiveStatistics:
+        return descriptive_statistics([observation.value.value for observation in self._observations])
 
     def to_tuple(self) -> tuple[Observation, ...]:
         return self._observations

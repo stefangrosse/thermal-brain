@@ -143,3 +143,53 @@ def test_time_series_orders_and_filters_observations() -> None:
         temperature_observation,
         energy_observation,
     )
+
+
+def test_time_series_descriptive_statistics() -> None:
+    source_id = Identifier()
+    sensor_id = Identifier()
+    observations = [
+        Observation(
+            timestamp=datetime(2026, 1, 1, 10, 0, tzinfo=UTC),
+            sensor_id=sensor_id,
+            source_id=source_id,
+            quantity=ObservationQuantity.TEMPERATURE,
+            value=Temperature(value=18.0),
+        ),
+        Observation(
+            timestamp=datetime(2026, 1, 1, 11, 0, tzinfo=UTC),
+            sensor_id=sensor_id,
+            source_id=source_id,
+            quantity=ObservationQuantity.TEMPERATURE,
+            value=Temperature(value=20.0),
+        ),
+        Observation(
+            timestamp=datetime(2026, 1, 1, 12, 0, tzinfo=UTC),
+            sensor_id=sensor_id,
+            source_id=source_id,
+            quantity=ObservationQuantity.TEMPERATURE,
+            value=Temperature(value=22.0),
+        ),
+    ]
+
+    statistics = ObservationTimeSeries(observations).descriptive_statistics()
+
+    assert statistics.count == 3
+    assert statistics.minimum == 18.0
+    assert statistics.maximum == 22.0
+    assert statistics.mean == 20.0
+    assert statistics.median == 20.0
+    assert statistics.variance == 8 / 3
+    assert statistics.standard_deviation == pytest.approx((8 / 3) ** 0.5)
+
+
+def test_time_series_descriptive_statistics_for_empty_series() -> None:
+    statistics = ObservationTimeSeries().descriptive_statistics()
+
+    assert statistics.count == 0
+    assert statistics.minimum is None
+    assert statistics.maximum is None
+    assert statistics.mean is None
+    assert statistics.median is None
+    assert statistics.variance is None
+    assert statistics.standard_deviation is None
