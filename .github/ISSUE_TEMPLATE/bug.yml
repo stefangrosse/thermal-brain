@@ -1,0 +1,29 @@
+name: Bug report
+description: Report incorrect behavior or a regression.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened?
+      placeholder: Describe the observed behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect instead?
+      placeholder: Describe the desired outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Include logs, steps to reproduce, or screenshots if helpful.
+    validations:
+      required: false
