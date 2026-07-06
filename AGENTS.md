@@ -126,43 +126,26 @@ The Core domain must remain completely independent of Home Assistant.
 
 # Development Workflow
 
-Always follow GitHub Flow.
+Every repository change must originate from exactly one GitHub Issue.
 
-Never work directly on `main`.
+Development must always start from the latest `main` branch.
 
-Every GitHub Issue is implemented inside its own feature branch.
+AI agents must never implement changes while on `main`.
+
+Every GitHub Issue must be implemented inside its own feature branch.
 
 Workflow
 
-Issue
-
-↓
-
-Feature Branch
-
-↓
-
-Implementation
-
-↓
-
-Tests
-
-↓
-
-Pull Request
-
-↓
-
-Review
-
-↓
-
-Squash Merge
-
-↓
-
-Delete Branch
+1. Switch to `main`.
+2. Pull the latest changes.
+3. Create a dedicated feature branch for the issue.
+4. Verify the current branch is not `main`.
+5. Implement the assigned GitHub Issue.
+6. Run Ruff, MyPy and Pytest.
+7. Commit using Conventional Commits.
+8. Push the feature branch.
+9. Open a Pull Request.
+10. Do not merge the Pull Request.
 
 ---
 
@@ -189,7 +172,7 @@ fix/<issue-number>-<short-description>
 Refactoring
 
 ```
-refactor/<short-description>
+refactor/<issue-number>-<short-description>
 ```
 
 ---
@@ -216,7 +199,13 @@ refactor(domain): simplify observation API
 
 # Pull Requests
 
-Every GitHub Issue results in exactly one Pull Request.
+Every Pull Request must address exactly one GitHub Issue.
+
+Every feature branch must be pushed and submitted as a Pull Request.
+
+AI agents must never merge Pull Requests automatically.
+
+All CI checks must pass before a Pull Request can be merged.
 
 Before opening a Pull Request verify
 
@@ -262,14 +251,11 @@ Never
 
 Architecture changes require an ADR.
 
-Current ADRs
+Current ADRs are stored in
 
-- ADR-0001 Building First
-- ADR-0002 Framework Independent Core
-- ADR-0003 Test Driven Development
-- ADR-0004 Pydantic Domain Models
-- ADR-0005 Strongly Typed Value Objects
-- ADR-0006 Domain uses Value Objects
+```
+docs/adr/
+```
 
 ---
 
@@ -299,22 +285,8 @@ Discussions with the project owner may be in German.
 
 # Development Process for AI Agents
 
-Before implementing a GitHub Issue
-
-1. Read AGENTS.md
-2. Read docs/ROADMAP.md
-3. Read all relevant ADRs
-4. Create a feature branch
-5. Implement the issue
-6. Write tests
-7. Update documentation
-8. Run Ruff
-9. Run MyPy
-10. Run Pytest
-11. Commit using Conventional Commits
-12. Open a Pull Request
-
-Never merge the Pull Request.
+AI agents must follow the mandatory workflow defined in
+[Development Workflow](#development-workflow).
 
 Never redesign the architecture unless explicitly requested.
 
