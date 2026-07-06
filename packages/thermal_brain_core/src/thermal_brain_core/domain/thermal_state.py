@@ -1,7 +1,6 @@
 from pydantic import BaseModel
+from thermal_brain_core.value_objects import Percentage, Power
 
 class ThermalState(BaseModel):
-    thermal_charge: float
-    estimated_heat_loss: float
-    indoor_temperature: float | None = None
-    outdoor_temperature: float | None = None
+    thermal_charge: Percentage
+    estimated_heat_loss: Power

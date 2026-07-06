@@ -1,6 +1,7 @@
 from pydantic import BaseModel
+from thermal_brain_core.value_objects import Identifier, Temperature
 
 class Zone(BaseModel):
-    id:str
-    name:str
-    target_temperature:float=21.0
+    id: Identifier
+    name: str
+    target_temperature: Temperature = Temperature(value=21.0)
