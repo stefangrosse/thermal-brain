@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Ruff, MyPy, Pytest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv pip install --system -e packages/thermal_brain_core pytest ruff mypy
+
+      - name: Run Ruff
+        run: ruff check packages/thermal_brain_core
+
+      - name: Run MyPy
+        run: mypy packages/thermal_brain_core/src packages/thermal_brain_core/tests
+
+      - name: Run Pytest
+        run: pytest packages/thermal_brain_core
